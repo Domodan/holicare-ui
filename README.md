@@ -8,9 +8,9 @@ HoliCare Diagnostic Tool - Frontend
 
 ## Technologies used
 
-- [React](https://reactjs.org/) single page application
-- Routing done using [React Router](https://reacttraining.com/react-router/web/guides/philosophy)
-- State management will be done either via [Redux](https://redux.js.org/) or any of choice
+- [Next](https://nextjs.org/) The React Framework for the Web
+- Used by some of the world's largest companies,
+- Next.js enables you to create high-quality web applications with the power of React components.
 - ... \[other technologies will come as they are integrated and/or used\]
 
 ## Setup
@@ -21,7 +21,8 @@ HoliCare Diagnostic Tool - Frontend
 git clone git@github.com:Domodan/holicare-ui.git
 ```
 
-2. Move to the directory and delete file **package.json** if it exist at the Project root
+2. Move to the directory and delete file **package-lock.json** if it exist at the Project root
+   > **_NOTE:_** Doing this may break the dependencies due to incompatibilities with newer versions.
 3. Install the dependencies with this command
 
 ```bash
