@@ -246,7 +246,7 @@ const SignIn: React.FC = () => {
                     className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
                   />
                 </div>
-
+                {/* 
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">
                   <span>
                     <svg
@@ -283,7 +283,7 @@ const SignIn: React.FC = () => {
                   </span>
                   Sign in with Google
                 </button>
-                {/* 
+                 */}
                 <div className="mt-6 text-center">
                   <p>
                     Don’t have any account?{" "}
@@ -291,7 +291,7 @@ const SignIn: React.FC = () => {
                       Sign Up
                     </Link>
                   </p>
-                </div> */}
+                </div>
               </form>
             </div>
           </div>
