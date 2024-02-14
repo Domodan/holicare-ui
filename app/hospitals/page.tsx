@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import Hospitals from "@/components/Hospitals";
+import { Card, CardContent } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Hospitals | HoliCare",
@@ -13,9 +14,11 @@ const HospitalPage = () => {
     <>
       <Breadcrumb pageName="Hospitals" />
 
-      <div className="flex flex-col gap-10">
-        <Hospitals />
-      </div>
+      <Card className="flex flex-col gap-10">
+        <CardContent>
+          <Hospitals />
+        </CardContent>
+      </Card>
     </>
   );
 };

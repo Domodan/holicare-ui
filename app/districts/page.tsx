@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import Districts from "@/components/Districts";
+import { Card, CardContent } from "@mui/material";
 
 export const metadata: Metadata = {
   title: "Districts | HoliCare",
@@ -10,13 +11,14 @@ export const metadata: Metadata = {
 
 const DistrictPage = () => {
   return (
-    <>
+    <div>
       <Breadcrumb pageName="Districts" />
-
-      <div className="flex flex-col gap-10">
-        <Districts />
-      </div>
-    </>
+      <Card>
+        <CardContent>
+          <Districts />
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
