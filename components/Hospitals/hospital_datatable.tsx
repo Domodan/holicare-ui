@@ -34,8 +34,8 @@ export default function HospitalDataTable({ data, headerTitle }: { data: HOSPITA
     const columns = [
         { field: 'id', headerName: 'ID' },
         { field: 'name', headerName: 'Name', width: 200 },
-        { field: 'type', headerName: 'Type', width: 200 },
-        { field: 'ownership', headerName: 'Ownership', width: 200 },
+        { field: 'type', headerName: 'Type', width: 120 },
+        { field: 'ownership', headerName: 'Ownership', width: 120 },
         { field: 'district', headerName: 'District', width: 200 },
         { field: 'location', headerName: 'Location', width: 200 },
         {
@@ -75,14 +75,15 @@ export default function HospitalDataTable({ data, headerTitle }: { data: HOSPITA
                 <h4 className="mb-6 text-xl font-semibold text-center text-black dark:text-white">
                     {headerTitle}
                 </h4>
-                <Button
+                <h3></h3>
+                {/* <Button
                     style={{
                         backgroundColor: "primary",
                         color: "white",
                         borderRadius: "5px",
                         margin: "15px",
                     }}
-                    variant="contained" onClick={handleClickOpen} size="small">Add a Doctor</Button>
+                    variant="contained" onClick={handleClickOpen} size="small">Add a Doctor</Button> */}
             </Stack>
             <DataGrid
                 columns={columns}

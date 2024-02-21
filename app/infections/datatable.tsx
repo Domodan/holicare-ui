@@ -39,7 +39,7 @@ export default function InfectionsDataTable() {
     }
     const columns = [
         { field: 'id', headerName: 'ID' },
-        { field: 'title', headerName: 'Infection', width: 200 },
+        { field: 'title', headerName: 'Infection', width: 130 },
         { field: 'symptom', headerName: 'Symptom', width: 200 },
         { field: 'risk_factors', headerName: 'Risk Factors', width: 200 },
         { field: 'created_at', headerName: 'Date Created', width: 130 },
