@@ -1,16 +1,16 @@
-"use client"
+
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
 import React from 'react';
 import { Metadata } from "next";
-import TextForm from '@/components/form-field/text_form';
-import SelectComponent from '@/components/form-field/drop-down';
-// export const metadata: Metadata = {
-//     title: "Add Patient | HoliCare",
-//     description: "This is the Add Patient page for HoliCare Platform",
-//     // other metadata
-// }
+import { FieldData } from '@/types/fieldData';
+import FormBuilder from '@/components/form-field/form_builder';
+export const metadata: Metadata = {
+    title: "Add Patient | HoliCare",
+    description: "This is the Add Patient page for HoliCare Platform",
+    // other metadata
+}
 
-const fields = [
+const fields: FieldData[] = [
     {
         category: "Personal Details",
         fields: [
@@ -203,59 +203,9 @@ const fields = [
 
 export default function Page() {
     return (
-        <div className="w-full mx-auto bg-white dark:bg-gray shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <form>
-                {fields.map((value, index) => (
-                    <div key={index} className="container">
-                        <label className='block text-lg font-semibold' htmlFor="first_name">{value.category}</label>
-                        <div className='flex md:flex-row flex-col justify-center items-center'>
-                            {
-                                value.fields.map((value, index) => (
-                                    <div className='container w-full' key={index}>
-                                        <TextForm label={value.form[0].label} type={value.form[0].type} placeholder={`Enter your ${value.form[0].label}`} onInput={(event: React.ChangeEvent<HTMLInputElement>) => alert(event.target.value)} />
-                                        {value.form[1] && <TextForm label={value.form[1].label} type={value.form[1].type} placeholder={`Enter your ${value.form[1].label}`} onInput={(event: React.ChangeEvent<HTMLInputElement>) => alert(event.target.value)} />}
-                                        {value.form[0].type == 'radio' || value.form[0].type == 'checkbox' ? (
-
-                                            value.form[0].options.map((value, index) => (
-                                                (<div key={index} className="flex flex-row justify-start items-center mb-4">
-                                                    <input
-                                                        type="radio"
-                                                        id={value.label}
-                                                        name="gender"
-                                                        value={value.value}
-                                                        className="mr-2 radio"
-                                                    />
-                                                    <label
-                                                        htmlFor={value.label}
-                                                        className="text-gray-700 dark:text-white"
-                                                    >
-                                                        {value.label}
-                                                    </label>
-                                                </div>)
-
-                                            ))
-                                        ) : value.form[0].type == 'select' ? (
-                                            <SelectComponent label={value.form[0].label} options={value.form[0].options} onChange={(event: React.ChangeEvent<HTMLSelectElement>) => alert(event.target.value)} />
-                                        ) : (<></>)}
-                                    </div>
-                                ),)
-                            }
-                        </div>
-                    </div>
-                ))
-                }
-
-                <div className="flex items-center justify-between">
-                    <div className="mb-4">
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type="submit"
-                        >
-                            Submit
-                        </button>
-                    </div>
-                </div>
-            </form>
+        <div>
+            <Breadcrumb pageName='Add Patient' />
+            <FormBuilder fields={fields} />
         </div>
     );
 };

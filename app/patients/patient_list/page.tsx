@@ -28,11 +28,31 @@ const Page = () => {
             label: "Actions"
         }
     ];
-
+    const rows = [
+        [
+            {
+                label: "/images/user/user.jpg",
+            }, {
+                label: "12345",
+            }, {
+                label: "Engineer",
+            }, {
+                label: "25",
+            }, {
+                label: "08123456789",
+            }, {
+                label: "Kampala",
+            }, {
+                label: "HoliCare",
+            }, {
+                label: ""
+            }
+        ]
+    ]
     return (
         <div>
             <Breadcrumb pageName='Patients' />
-            <DataTable columns={cols} />
+            <DataTable columns={cols} rows={rows} actionComponent={<ButtonComponent buttonText='Add Patient' callbackUrl='/patients/patient_list/add_patient' />} />
         </div>
     );
 };

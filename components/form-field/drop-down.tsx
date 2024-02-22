@@ -2,7 +2,7 @@
 import React from 'react';
 const SelectComponent = ({ options, label, onChange }: { options: any[], label: string, onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void }) => {
     return (
-        <div className="mb-4">
+        <div className="mb-4 px-2">
             <div className="label">
                 <span className="label-text">{label}</span>
             </div>

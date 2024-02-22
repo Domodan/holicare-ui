@@ -3,7 +3,7 @@ import React from "react";
 import $ from "jquery";
 import "datatables.net";
 import "./datatable.css";
-
+import Image from "next/image";
 export default function DataTable({ title, columns, rows, actionComponent }: { title?: string, columns?: any[], rows?: any[], actionComponent?: React.ReactNode }) {
     React.useEffect(() => {
         $(document).ready(function () {
@@ -18,6 +18,17 @@ export default function DataTable({ title, columns, rows, actionComponent }: { t
             ($("#example") as any).DataTable().destroy();
         };
     }, []);
+    // function to check if the provided string if a file path
+    function isFilePath(str: string): boolean {
+        // Use a regular expression to match common file path patterns
+        const filePattern = /^(\/|\w:\\)?\/?([^\/\\]+[\/\\])*[^\/\\]+\.[^\/\\]+$/;
+        let result = filePattern.test(str);
+        return result;
+    }
+    // function to handle navigation
+    function handleNavigation(url: string) {
+        window.location.href = url;
+    }
     return (
         <>
             <div className="container bg-white rounded-lg mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -42,10 +53,11 @@ export default function DataTable({ title, columns, rows, actionComponent }: { t
                     <tbody>
                         {
                             rows?.map((row, index) => (
-                                <tr key={index}>
+                                <tr key={index} onClick={() => handleNavigation("/patients/add_patient")}>
                                     {
-                                        row.map((cell: any, index: any) => (
-                                            <td key={index} className="border px-4 py-2">{cell}</td>
+                                        // (console.log())
+                                        row.map((cell: any, index: number) => (
+                                            <td key={index} className="border object-center px-4 py-2">{(isFilePath(cell.label) == true) ? (<Image src={cell.label} alt={cell.label} width={30} height={30} />) : (cell.label)}</td>
                                         ),)
                                     }
                                 </tr>
