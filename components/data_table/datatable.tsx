@@ -4,7 +4,7 @@ import $ from "jquery";
 import "datatables.net";
 import "./datatable.css";
 import Image from "next/image";
-export default function DataTable({ title, columns, rows, actionComponent }: { title?: string, columns?: any[], rows?: any[], actionComponent?: React.ReactNode }) {
+export default function DataTable({ title, columns, rowNavigationUrl, rows, actionComponent }: { title?: string, rowNavigationUrl?: string, columns?: any[], rows?: any[], actionComponent?: React.ReactNode }) {
     React.useEffect(() => {
         $(document).ready(function () {
             ($("#example") as any).DataTable({
@@ -26,8 +26,8 @@ export default function DataTable({ title, columns, rows, actionComponent }: { t
         return result;
     }
     // function to handle navigation
-    function handleNavigation(url: string) {
-        window.location.href = url;
+    function handleNavigation(url?: string) {
+        window.location.href = url ?? "";
     }
     return (
         <>
@@ -53,7 +53,7 @@ export default function DataTable({ title, columns, rows, actionComponent }: { t
                     <tbody>
                         {
                             rows?.map((row, index) => (
-                                <tr key={index} onClick={() => handleNavigation("/patients/add_patient")}>
+                                <tr key={index} onClick={() => handleNavigation(rowNavigationUrl)}>
                                     {
                                         // (console.log())
                                         row.map((cell: any, index: number) => (

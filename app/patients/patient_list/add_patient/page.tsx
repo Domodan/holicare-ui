@@ -198,7 +198,6 @@ const fields: FieldData[] = [
             }
         ]
     }
-
 ];
 
 export default function Page() {
