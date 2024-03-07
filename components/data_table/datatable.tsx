@@ -4,7 +4,7 @@ import $ from "jquery";
 import "datatables.net";
 import "./datatable.css";
 import Image from "next/image";
-export default function DataTable({ title, columns, rowNavigationUrl, rows, actionComponent }: { title?: string, rowNavigationUrl?: string, columns?: any[], rows?: any[], actionComponent?: React.ReactNode }) {
+export default function DataTable({ title, columns, customData, rowNavigationUrl, rows, actionComponent }: { title?: string, customData?: any, rowNavigationUrl?: string, columns?: any[], rows?: any[], actionComponent?: React.ReactNode }) {
     React.useEffect(() => {
         $(document).ready(function () {
             ($("#example") as any).DataTable({
@@ -31,7 +31,7 @@ export default function DataTable({ title, columns, rowNavigationUrl, rows, acti
     }
     return (
         <>
-            <div className="container bg-white rounded-lg mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="container bg-white dark:bg-boxdark rounded-lg mx-auto px-4 sm:px-6 lg:px-8 py-8">
                 <div className="flex flex-row justify-between items-center ">
                     <h1 className="text-2xl font-bold mb-4">{title}</h1>
                     {actionComponent && (
@@ -52,16 +52,21 @@ export default function DataTable({ title, columns, rowNavigationUrl, rows, acti
                     </thead>
                     <tbody>
                         {
-                            rows?.map((row, index) => (
-                                <tr key={index} onClick={() => handleNavigation(rowNavigationUrl)}>
-                                    {
-                                        // (console.log())
-                                        row.map((cell: any, index: number) => (
-                                            <td key={index} className="border object-center px-4 py-2">{(isFilePath(cell.label) == true) ? (<Image src={cell.label} alt={cell.label} width={30} height={30} />) : (cell.label)}</td>
-                                        ),)
-                                    }
-                                </tr>
-                            ))
+                            customData ? (
+                                <>
+                                    {customData}
+                                </>
+                            ) :
+                                rows?.map((row, index) => (
+                                    <tr key={index} onClick={() => handleNavigation(rowNavigationUrl)}>
+                                        {
+                                            // (console.log())
+                                            row.map((cell: any, index: number) => (
+                                                <td key={index} className="border object-center px-4 py-2">{(isFilePath(cell.label) == true) ? (<Image src={cell.label} alt={cell.label} width={30} height={30} />) : (cell.label)}</td>
+                                            ),)
+                                        }
+                                    </tr>
+                                ))
                         }
                         {/* Add more rows as needed */}
                     </tbody>

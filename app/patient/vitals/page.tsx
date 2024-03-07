@@ -12,23 +12,52 @@ export const metadata: Metadata = {
 const Page = () => {
     const cols = [
         {
-            label: "Temperature",
+            label: "Month",
         }, {
-            label: "Bp",
+            label: "Temp (DEG C)",
         }, {
-            label: "Pulse",
+            label: "BP (mmHg)",
         }, {
-            label: "Respiratory",
+            label: "Pulse (beats/min)",
         }, {
-            label: "SPO",
+            label: "R.Rate (breath/min)",
         }, {
-            label: "Action",
-        }
+            label: "SPO (%)",
+        },
+
     ]
+    // patient's vitals 
+    const rowData = [
+        [{
+            label: "June",
+        }, {
+            label: "36",
+        }, {
+            label: "80",
+        }, {
+            label: "80",
+        }, {
+            label: "15",
+        }, {
+            label: "90",
+        }], [{
+            label: "July",
+        }, {
+            label: "3",
+        }, {
+            label: "8",
+        }, {
+            label: "10",
+        }, {
+            label: "5",
+        }, {
+            label: "9",
+        }],
+    ];
     return (
         <div >
             <Breadcrumb pageName='Vitals' />
-            <DataTable title='Vitals' columns={cols} actionComponent={<ActionButton buttonText='Add Vitals' />} />
+            <DataTable title='Vitals' columns={cols} rows={rowData} actionComponent={<ActionButton buttonText='Add Vitals' />} />
         </div>
     );
 };

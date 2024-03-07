@@ -25,6 +25,7 @@ import TestResultIcon from "../icons/testResult";
 import AppointmentIcon from "../icons/appointmentIcon";
 import DiagonosisIcon from "../icons/diagonosisIcon";
 import DocumentIcon from "../icons/documentIcon";
+import SidebarButton from "../icons/sidebar_button";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -41,6 +42,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const [sidebarExpanded, setSidebarExpanded] = useState(
     storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
   );
+  // hook to handle selected tile
+  const [selectedTile, setSelectedTile] = React.useState<number>(parseInt(localStorage.getItem("selected") ?? "0"))
 
   // close on click outside
   useEffect(() => {
@@ -123,6 +126,12 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
       icon: <DocumentIcon />,
     }
   ]
+  // function to update the patient's sidebar
+  const updateSidebar = (index: number) => {
+    setSelectedTile(index)
+    localStorage.setItem("selected", index.toString())
+  }
+
   return (
     <aside
       ref={sidebar}
@@ -148,19 +157,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           aria-expanded={sidebarOpen}
           className="block lg:hidden"
         >
-          <svg
-            className="fill-current"
-            width="20"
-            height="18"
-            viewBox="0 0 20 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M19 8.175H2.98748L9.36248 1.6875C9.69998 1.35 9.69998 0.825 9.36248 0.4875C9.02498 0.15 8.49998 0.15 8.16248 0.4875L0.399976 8.3625C0.0624756 8.7 0.0624756 9.225 0.399976 9.5625L8.16248 17.4375C8.31248 17.5875 8.53748 17.7 8.76248 17.7C8.98748 17.7 9.17498 17.625 9.36248 17.475C9.69998 17.1375 9.69998 16.6125 9.36248 16.275L3.02498 9.8625H19C19.45 9.8625 19.825 9.4875 19.825 9.0375C19.825 8.55 19.45 8.175 19 8.175Z"
-              fill=""
-            />
-          </svg>
+          {/* sidebar button */}
+          <SidebarButton />
+          {/* end of sidebar button */}
         </button>
       </div>
       {/* <!-- SIDEBAR HEADER --> */}
@@ -170,14 +169,14 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
         <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
           {/* <!-- Menu Group --> */}
           {
-            pathname.startsWith('/patient') ?
+            pathname.startsWith('/patient/') ?
               (
                 <>
                   <ul className="mb-6 flex flex-col gap-1.5">
 
                     {
                       patientRoutes.map((element, index) => (
-                        <SideBarTile url={element.url} icon={element.icon} title={element.label} key={index} />
+                        <SideBarTile url={element.url} onSelect={() => updateSidebar(index)} icon={element.icon} title={element.label} selected={selectedTile == index} key={index} />
                       ))
                     }
                   </ul>
@@ -274,14 +273,6 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                           "bg-graydark dark:bg-meta-4"
                           }`}
                       >
-                        {/* <svg
-										className="fill-current"
-										xmlns="http://www.w3.org/2000/svg"
-										height="1em"
-										viewBox="0 0 576 512"
-									>
-										<path d="M48 0C21.5 0 0 21.5 0 48V256H144c8.8 0 16 7.2 16 16s-7.2 16-16 16H0v64H144c8.8 0 16 7.2 16 16s-7.2 16-16 16H0v80c0 26.5 21.5 48 48 48H265.9c-6.3-10.2-9.9-22.2-9.9-35.1c0-46.9 25.8-87.8 64-109.2V271.8 48c0-26.5-21.5-48-48-48H48zM152 64h16c8.8 0 16 7.2 16 16v24h24c8.8 0 16 7.2 16 16v16c0 8.8-7.2 16-16 16H184v24c0 8.8-7.2 16-16 16H152c-8.8 0-16-7.2-16-16V152H112c-8.8 0-16-7.2-16-16V120c0-8.8 7.2-16 16-16h24V80c0-8.8 7.2-16 16-16zM512 272a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM288 477.1c0 19.3 15.6 34.9 34.9 34.9H541.1c19.3 0 34.9-15.6 34.9-34.9c0-51.4-41.7-93.1-93.1-93.1H381.1c-51.4 0-93.1 41.7-93.1 93.1z" />
-									</svg> */}
                         {/* hospistal icon */}
                         <HospitalIcon />
                         Hospitals
@@ -480,7 +471,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                               <ul className="mt-4 mb-5.5 flex flex-col gap-2.5 pl-6">
                                 <li>
                                   <Link
-                                    href="/patients/patient_list"
+                                    href="/patients"
                                     className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/patients/patient_list" && "text-white"
                                       }`}
                                   >
@@ -488,7 +479,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                   </Link>
                                 </li>   <li>
                                   <Link
-                                    href="/patients/patient_list/add_patient"
+                                    href="/patients/add_patient"
                                     className={`group relative flex items-center gap-2.5 rounded-md px-4 font-medium text-bodydark2 duration-300 ease-in-out hover:text-white ${pathname === "/patients/patient_list/add_patient" && "text-white"
                                       }`}
                                   >
