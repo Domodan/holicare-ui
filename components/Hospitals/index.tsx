@@ -1,5 +1,7 @@
 import { HOSPITAL } from "@/types/hospital";
 import HospitalDataTable from "./hospital_datatable";
+import DataTable from '@/components/data_table/datatable';
+import ButtonComponent from '@/components/buttons/button_component';
 
 const hospitalData: HOSPITAL[] = [
   {

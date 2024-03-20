@@ -52,7 +52,7 @@ const Page = () => {
     return (
         <div>
             <Breadcrumb pageName='Patients' />
-            <DataTable columns={cols} rows={rows} rowNavigationUrl='/patient/dashboard' actionComponent={<ButtonComponent buttonText='Add Patient' callbackUrl='/patients/patient_list/add_patient' />} />
+            <DataTable columns={cols} rows={rows} rowNavigationUrl='/patient/dashboard' actionComponent={<ButtonComponent buttonText='Add Patient' callbackUrl='/patients/patients/add_patient' />} />
         </div>
     );
 };

@@ -13,11 +13,7 @@ const NursesPage = () => {
   return (
     <>
       <Breadcrumb pageName="Nurses" />
-      <Card className="flex flex-col gap-10">
-        <CardContent>
-          <Nurse />
-        </CardContent>
-      </Card>
+      <Nurse />
     </>
   );
 };

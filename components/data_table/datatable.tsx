@@ -58,7 +58,7 @@ export default function DataTable({ title, columns, customData, rowNavigationUrl
                                 </>
                             ) :
                                 rows?.map((row, index) => (
-                                    <tr key={index} onClick={() => handleNavigation(rowNavigationUrl)}>
+                                    <tr key={index} className="cursor-pointer" onClick={() => handleNavigation(rowNavigationUrl)}>
                                         {
                                             // (console.log())
                                             row.map((cell: any, index: number) => (

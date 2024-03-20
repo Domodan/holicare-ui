@@ -16,13 +16,8 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <div>
-            <CustomHeader title="Risk Factors" description="Risk Factors" />
             <Breadcrumb pageName="Risk Factors" />
-            <Card>
-                <CardContent>
-                    <DataTable />
-                </CardContent>
-            </Card>
+             <DataTable />
         </div>
     );
 }

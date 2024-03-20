@@ -12,13 +12,8 @@ export const metadata: Metadata = {
 const HospitalPage = () => {
   return (
     <>
-      <Breadcrumb pageName="Hospitals" />
-
-      <Card className="flex flex-col gap-10">
-        <CardContent>
-          <Hospitals />
-        </CardContent>
-      </Card>
+      <Breadcrumb pageName="Hospitals"/>
+      <Hospitals />
     </>
   );
 };

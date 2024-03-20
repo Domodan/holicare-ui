@@ -1,14 +1,8 @@
 /* eslint-disable react/jsx-no-undef */
 "use client"
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { Alert, Button, IconButton, Snackbar, Stack } from '@mui/material';
-import CustomDialog from '@/components/custom_dialog/custom_dialog';
-import CustomTextField from '@/components/textfield/custom_textfield';
-import Image from "next/image";
-import LoadingButton from '@mui/lab/LoadingButton';
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import DataTable from '@/components/data_table/datatable';
+import ButtonComponent from '@/components/buttons/button_component';
 import { Doctor } from '@/types/doctor';
 import { HOSPITAL } from '@/types/hospital';
 
@@ -31,31 +25,46 @@ export default function HospitalDataTable({ data, headerTitle }: { data: HOSPITA
         setOpenDelete(true);
         setSelectedData(row);
     }
-    const columns = [
-        { field: 'id', headerName: 'ID' },
-        { field: 'name', headerName: 'Name', width: 200 },
-        { field: 'type', headerName: 'Type', width: 120 },
-        { field: 'ownership', headerName: 'Ownership', width: 120 },
-        { field: 'district', headerName: 'District', width: 200 },
-        { field: 'location', headerName: 'Location', width: 200 },
+    const cols = [
         {
-            field: 'actions',
-            headerName: 'Actions',
-            renderCell: (params: any) => {
-                // Define your action buttons or menu
-                return (
-                    <div>
-                        <IconButton onClick={() => handleEdit(params.row)}>
-                            <ModeEditIcon color="success" />
-                        </IconButton>
-                        <IconButton onClick={() => handleDelete(params.row)}>
-                            <DeleteOutlineIcon color="error" />
-                        </IconButton>
-                    </div>
-                );
-            },
-        },
+            label: "Avatar"
+        }, {
+            label: "Patient ID"
+        }, {
+            label: "Occupation"
+        }, {
+            label: "Age"
+        }, {
+            label: "Phone Number"
+        }, {
+            label: "Location"
+        }, {
+            label: "Hospital"
+        }, {
+            label: "Actions"
+        }
     ];
+    const rows = [
+        [
+            {
+                label: "/images/user/user.jpg",
+            }, {
+                label: "12345",
+            }, {
+                label: "Engineer",
+            }, {
+                label: "25",
+            }, {
+                label: "08123456789",
+            }, {
+                label: "Kampala",
+            }, {
+                label: "HoliCare",
+            }, {
+                label: ""
+            }
+        ]
+    ]
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -71,75 +80,10 @@ export default function HospitalDataTable({ data, headerTitle }: { data: HOSPITA
     };
     return (
         <div style={{ width: '100%', height: '100%' }}>
-            <Stack direction='row' justifyContent='space-between'>
-                <h4 className="mb-6 text-xl font-semibold text-center text-black dark:text-white">
-                    {headerTitle}
-                </h4>
-                <h3></h3>
-                {/* <Button
-                    style={{
-                        backgroundColor: "primary",
-                        color: "white",
-                        borderRadius: "5px",
-                        margin: "15px",
-                    }}
-                    variant="contained" onClick={handleClickOpen} size="small">Add a Doctor</Button> */}
-            </Stack>
-            <DataGrid
-                columns={columns}
-                rows={data}
-                pageSizeOptions={[5, 10, 25, 50, 100]}
-            />
-            {/* dialog to add a new risk factor */}
-            <CustomDialog open={open} closeDialog={handleClose} title={'New Doctor'}>
-                {/* <CustomTextField label={'Risk Factor'} error={false} placeHolder={'Enter risk factor'} errorText={''} onEdit={(x: any) => console.log(x)} />
-            <CustomTextField label={'Category'} error={false} placeHolder={'Enter category'} errorText={''} onEdit={(x: any) => console.log(x)} /> */}
-                <LoadingButton loading={loader} variant="contained" style={{ backgroundColor: "primary", color: "white", borderRadius: "5px", margin: "10px" }} onClick={() => { }}>Add Record</LoadingButton>
-            </CustomDialog>
+            <div className="rounded-lg border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark  text-black dark:text-white dark:bg-boxdark sm:px-7.5 xl:pb-1">
+                <DataTable columns={cols} rows={rows} actionComponent={<ButtonComponent buttonText='Add a Hospital' callbackUrl='/' />} />
 
-            {/* dialog for editing */}
-            <CustomDialog open={openEdit} title={`Edit Infection`} closeDialog={() => setOpenEdit(false)}>
-                {/* <CustomTextField label={'Risk Factor'} error={false} defaultValue={selectedData.} placeHolder={'Enter risk factor....'} onEdit={(x: any) => console.log(x)} />
-                <CustomTextField label={'Category'} error={false} defaultValue={selectedData.body} placeHolder={'Enter body....'} onEdit={(x: any) => console.log(x)} /> */}
-                <LoadingButton loading={loader} variant="contained" style={{ backgroundColor: "primary", color: "white", borderRadius: "5px", margin: "10px" }} onClick={handleForm}>Add Record</LoadingButton>
-            </CustomDialog>
-
-            {/* dialog for deleting an infection */}
-            <CustomDialog
-                open={openDelete}
-                closeDialog={handleClose}
-                title={'Delete Infection'}
-                actions={[
-                    {
-                        label: 'Cancel',
-                        color: 'primary',
-                        onClick: async () => {
-                            setSnackMsg("Operation Canceled!");
-                            setOpenSnack(true);
-                            setOpenDelete(false)
-                        },
-                    }, {
-                        label: 'Delete',
-                        color: 'error',
-                        onClick: async () => {
-                            setSnackMsg(`${selectedData.name} deleted successfully.`);
-                            setOpenSnack(true);
-                            setOpenDelete(false);
-                        },
-                    }
-                ]}
-            >
-                <center>{`Are you sure you want to delete ${selectedData.name}?`}</center>
-            </CustomDialog>
-
-            {/* snack bar to display a short message */}
-            <Snackbar
-                open={openSnack}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                autoHideDuration={1000}
-                onClose={handleClose}
-                message={snackMsg}
-            />
+            </div>
         </div >
     );
 }

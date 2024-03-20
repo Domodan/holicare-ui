@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import DashboardCard from './DashboardCard';
+import { Chart } from 'chart.js';
 
 export default function VisitsChart() {
+    Chart.prototype.options
     // Sample data (replace with your actual data)
     const visitData = [
         { x: 'Monday', y: 10 },
@@ -12,18 +14,7 @@ export default function VisitsChart() {
         { x: 'Thursday', y: 12 },
         { x: 'Friday', y: 18 },
     ];
-    const options = {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top' as const,
-            },
-            title: {
-                display: true,
-                text: 'Patient\'s Visits',
-            },
-        },
-    };
+
     const labels = visitData.map((item) => item.x); // Extract labels from data
     const [chartData, setChartData] = useState({
         data: {
@@ -40,65 +31,56 @@ export default function VisitsChart() {
             ],
         },
         options: {
-            maintainAspectRatio: false,
             responsive: true,
-            tooltips: {
-                mode: "index",
-                intersect: false,
-            },
-            hover: {
-                mode: "nearest",
-                intersect: true,
-            },
-            legend: {
-                labels: {
-                    fontColor: "rgba(0,0,0,.4)",
+            plugins: {
+                legend: {
+                    position: 'right' as const,
+                    display: true,
+                    labels: {
+                        usePointStyle: true
+                    },
                 },
-                align: "end",
-                position: "bottom",
-            },
-            scales: {
-                xAxes: [
-                    {
-                        scaleLabel: {
+                title: {
+                    display: true,
+                    text: 'Patient\'s Visits',
+                },
+                scales: {
+                    xAxes: [
+                        {
                             display: true,
-                            labelString: "Visit Label", // Adjust label as needed
+                            scaleLabel: {
+                                display: true,
+                                text: "Day of the Week", // Adjust label as needed
+                                fontStyle: 'bold' // Added fontStyle
+                            },
+                            gridLines: {
+                                borderDash: [2],
+                                borderDashOffset: [2],
+                                color: "rgba(33, 37, 41, 0.3)",
+                                zeroLineColor: "rgba(33, 37, 41, 0.3)",
+                                zeroLineBorderDash: [2],
+                                zeroLineBorderDashOffset: [2],
+                            },
                         },
-                        gridLines: {
-                            borderDash: [2],
-                            borderDashOffset: [2],
-                            color: "rgba(33, 37, 41, 0.3)",
-                            zeroLineColor: "rgba(33, 37, 41, 0.3)",
-                            zeroLineBorderDash: [2],
-                            zeroLineBorderDashOffset: [2],
+                    ],
+                    yAxes: [
+                        {
+                            scaleLabel: {
+                                display: true,
+                                text: "Number of Visits",
+                                fontStyle: 'bold' // Added fontStyle
+                            },
+
                         },
-                    },
-                ],
-                yAxes: [
-                    {
-                        display: true,
-                        scaleLabel: {
-                            display: false,
-                            labelString: "Number of Visits",
-                        },
-                        gridLines: {
-                            borderDash: [2],
-                            drawBorder: false,
-                            borderDashOffset: [2],
-                            color: "rgba(33, 37, 41, 0.2)",
-                            zeroLineColor: "rgba(33, 37, 41, 0.15)",
-                            zeroLineBorderDash: [2],
-                            zeroLineBorderDashOffset: [2],
-                        },
-                    },
-                ],
+                    ],
+                },
             },
         },
     });
 
     return (
         <DashboardCard title="Patient Visits" label="Visits">
-            <Bar data={chartData.data} options={options} />
+            <Bar data={chartData.data} options={chartData.options} />
         </DashboardCard>
     );
 }
