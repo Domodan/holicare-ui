@@ -2,11 +2,7 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import React from "react";
 import DataTable from "./riskfactor_datatable";
-import { Card, CardContent } from "@mui/material";
 import type { Metadata } from "next";
-import CustomTextField from "@/components/textfield/custom_textfield";
-import { LoadingButton } from "@mui/lab";
-import CustomHeader from "@/components/customs/custom_header";
 
 export const metadata: Metadata = {
     title: "RiskFactors | HoliCare",
@@ -17,7 +13,7 @@ export default function Page() {
     return (
         <div>
             <Breadcrumb pageName="Risk Factors" />
-             <DataTable />
+            <DataTable />
         </div>
     );
 }
